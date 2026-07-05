@@ -52,7 +52,7 @@ function draw() {
 
     if (
         headX < 0 || headX >= 400 || headY < 0 || headY >= 400 ||
-        snake.some((part) => part.x === newHead.x && part.y === newHead.y)
+        snake.slice(1).some((part) => part.x === newHead.x && part.y === newHead.y)
     ) {
         alert("Game Over!");
         location.reload();

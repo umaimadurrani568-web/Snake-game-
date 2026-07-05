@@ -1,4 +1,4 @@
-const canvas = document.getElementById("game");
+const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 const box = 20;
@@ -14,9 +14,9 @@ document.addEventListener("keydown", changeDirection);
 
 function changeDirection(e) {
     if (e.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
-    if (e.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
-    if (e.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
-    if (e.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
+    else if (e.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
+    else if (e.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
+    else if (e.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
 }
 
 function draw() {
@@ -26,8 +26,8 @@ function draw() {
     ctx.fillStyle = "red";
     ctx.fillRect(food.x, food.y, box, box);
 
-    ctx.fillStyle = "lime";
-    snake.forEach(part => {
+    snake.forEach((part) => {
+        ctx.fillStyle = "lime";
         ctx.fillRect(part.x, part.y, box, box);
     });
 
@@ -51,9 +51,8 @@ function draw() {
     const newHead = { x: headX, y: headY };
 
     if (
-        headX < 0 || headY < 0 ||
-        headX >= 400 || headY >= 400 ||
-        snake.some(part => part.x === headX && part.y === headY)
+        headX < 0 || headX >= 400 || headY < 0 || headY >= 400 ||
+        snake.some((part) => part.x === newHead.x && part.y === newHead.y)
     ) {
         alert("Game Over!");
         location.reload();
@@ -63,3 +62,4 @@ function draw() {
 }
 
 setInterval(draw, 100);
+
